@@ -1,0 +1,55 @@
+@startuml Azul classes
+class Container{
+
+}
+
+Container <|--Tiles
+enum Tiles{
+    BLUE
+    YELLOW
+    RED
+    BLACK
+    BLUESTAR
+}
+
+Container <|-- PlayerBoard
+class PlayerBoard{
+    + points : int
+    __methods__
+    + calculatePoints()
+
+}
+
+PlayerBoard +-- SampleTileRow
+class SampleTileRow{
+    row[] : Array[Tile]
+    __setter__
+    setRow()
+    __getter__
+    getRow()
+    __methods__
+
+
+}
+note left: setter makes all the rows (0-4)
+
+PlayerBoard <|-- Wall
+class Wall{
+    wall[4][4] : Array[Tile][Tile]
+    __methods__
+    + static int addPoints()
+}
+
+PlayerBoard <|-- BrokenTiles
+class BrokenTiles{
+    + brokenTiles[6] : Array[Tile]
+    __setter__
+    + setBrokenTiles()
+    __getter__
+    - getBrokenTiles()
+    __methods__
+     + static int minusPoints()
+
+}
+
+@enduml
