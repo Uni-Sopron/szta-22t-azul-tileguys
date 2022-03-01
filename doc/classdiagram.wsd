@@ -1,6 +1,28 @@
 @startuml Azul classes
 class Container{
+    + supply[BLUE, YELLOW, RED, BLACK, BLUESTAR] : Array[20,20,20,20,20]
+    
 
+}
+note right: those are Array[i] maximums
+
+Container <|-- Disc
+class Disc{
+    disc[BLUE, YELLOW, RED, BLACK, BLUESTAR] : Array[4,4,4,4,4]
+    __methods__
+    + getSameColoredTiles(Tile)
+    + dropTiles(disc,centerpool)
+    __setter__
+    + setDisc()
+}
+Container <|-- CenterPool
+CenterPool .. Disc
+class CenterPool{
+    + centerpool[BLUE, YELLOW, RED, BLACK, BLUESTAR] : Array[20,20,20,20,20]
+    __setter__
+    + Disc.dropTiles()
+    __methods__
+    + getSameColoredTiles(Tile)
 }
 
 Container <|--Tiles
