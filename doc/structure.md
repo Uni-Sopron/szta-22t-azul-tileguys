@@ -1,7 +1,7 @@
 
 Asztal:
 
-1 db gyűjtőzsák  - 75 db csempe  (lista)
+1 db gyűjtőzsák  - 100 db csempe  (lista)
 
 7 db max 4 elemű tál (lista)
 1 db asztal közepe- max 21 elem (lista)
