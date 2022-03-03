@@ -1,2 +1,0 @@
-[Tile|+color: enum;+totalQuantity : Array|selectTiles(color, String fromWhere)]
-[PlayerBoard|+points: int(0-100); +wall1stRow: Array; +wall2ndRow : Array; + ... ; +sample1stRow : Array; +sample2ndRow : Array; +...; brokenTiles int| minusPoints(int brokenTiles); addPoints()]
