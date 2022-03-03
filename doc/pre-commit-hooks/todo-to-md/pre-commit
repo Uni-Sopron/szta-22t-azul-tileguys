@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# list all the TODO from all the files except from all files starting with a dot then put them into TODO.md file
+#grep -r -i -n -E "(@todo|TODO|FIXME)(.*?)$" . --colour --exclude=TODO.md --exclude=".*"  > TODO.md
+grep -rI -i -n -E "(@todo|TODO|FIXME)(.*?)$" . --colour --exclude=TODO.md --exclude=".*" | grep -v .git > TODO.md
+git add TODO.md
