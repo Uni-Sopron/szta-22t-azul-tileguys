@@ -8,3 +8,4 @@
 ./doc/pre-commit-hooks/todo-to-md/readme.md:11:*./test.php:21: // TODO test the method*  
 ./doc/pre-commit-hooks/todo-to-md/readme.md:12:*./test.php:105: // TODO create a list*  
 ./src/App.java:7:        // TODO check commit hook
+./src/App.java:8:        // farokméret
