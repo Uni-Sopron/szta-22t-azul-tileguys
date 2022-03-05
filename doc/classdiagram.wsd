@@ -5,6 +5,7 @@ class Container{
 
 }
 note right: those are Array[i] maximums
+
 Container o-- Bag
 class Bag{
     + setDisc(Disc)
@@ -32,12 +33,12 @@ class Disc{
     + dropTilesToCenter()
     + setDisc()
 }
+
 Container o-- CenterPool
 CenterPool --o Disc
 class CenterPool{
     + getSameColoredTiles(Tile)
 }
-
 
 
 Container o-- PlayerBoard
