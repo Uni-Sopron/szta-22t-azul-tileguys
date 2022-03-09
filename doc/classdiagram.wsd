@@ -1,24 +1,23 @@
 @startuml Azul classes
-class Container{
+abstract class Container{
     + container[BLUE, YELLOW, RED, BLACK, BLUESTAR] : Array[20,20,20,20,20]
     
 
 }
-note right: those are Array[i] maximums
 
-Container o-- Bag
+Container --o Bag
 class Bag{
     + setDisc(Disc)
 
 }
 
-Container o-- DiscardPile
+Container --o DiscardPile
 class DiscardPile{
     + getBrokenTiles(BroktenTiles)
     + fillUpBag()
 }
 
-Container *--Tiles
+Container --*Tiles
 enum Tiles{
     BLUE
     YELLOW
@@ -27,21 +26,18 @@ enum Tiles{
     BLUESTAR
 }
 
-Container o-- Disc
+Container --o Disc
 class Disc{
     + getSameColoredTiles(Disc)
     + dropTilesToCenter()
     + setDisc()
 }
 
-Container o-- CenterPool
-CenterPool --o Disc
+Container --o CenterPool
 class CenterPool{
     + getSameColoredTiles(Tile)
 }
 
-
-Container o-- PlayerBoard
 class PlayerBoard{
     + points : int
     __methods__
@@ -49,23 +45,25 @@ class PlayerBoard{
 
 }
 
-PlayerBoard *-- SampleTileRow
-class SampleTileRow{
-    row[] : Array[Tile]
-    __setter__
-    setRow()
-    __getter__
-    getRow()
+PlayerBoard --* SampleTileRows
+class SampleTileRows{
+    row1[] : Map[Tile,int count]
+    row2[] : Map[Tile,int count]
+    row3[] : Map[Tile,int count]
+    row4[] : Map[Tile,int count]
+    row5[] : Map[Tile,int count]
+    __methods__
+    setRow(row)
+    getRow(row)
 
 }
-note left: setter makes all the rows (0-4)
 
-PlayerBoard *-- Wall
+PlayerBoard --* Wall
 class Wall{
     wall[4][4] : Array[][]
 }
 
-PlayerBoard *-- BrokenTiles
+PlayerBoard --* BrokenTiles
 class BrokenTiles{
     + brokenTiles[6] : Array[Tile]
     __setter__
@@ -73,4 +71,9 @@ class BrokenTiles{
 
 }
 
+Game --* Container : contains
+Game --* PlayerBoard : contains
+class Game {
+
+}
 @enduml
