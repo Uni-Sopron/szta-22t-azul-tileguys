@@ -1,0 +1,3 @@
+#!/bin/sh
+
+sh %azul_home%/docs/hooks/pre-commit-hooks/*
