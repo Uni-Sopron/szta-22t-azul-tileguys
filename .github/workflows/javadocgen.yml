@@ -1,8 +1,8 @@
 name: Deploy Javadoc
 
-on:
-  push:
-    branches: [push]
+on: [push]
+#   push:
+#     branches:
 #       - develop
 #       - main
 
