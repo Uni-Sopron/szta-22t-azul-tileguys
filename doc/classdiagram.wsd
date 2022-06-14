@@ -1,31 +1,23 @@
 @startuml Azul classes
-class Container{
-    + supply[BLUE, YELLOW, RED, BLACK, BLUESTAR] : Array[20,20,20,20,20]
+abstract class Container{
+    + container[BLUE, YELLOW, RED, BLACK, BLUESTAR] : Array[20,20,20,20,20]
     
 
 }
-note right: those are Array[i] maximums
 
-Container <|-- Disc
-class Disc{
-    disc[BLUE, YELLOW, RED, BLACK, BLUESTAR] : Array[4,4,4,4,4]
-    __methods__
-    + getSameColoredTiles(Tile)
-    + dropTiles(disc,centerpool)
-    __setter__
-    + setDisc()
-}
-Container <|-- CenterPool
-CenterPool .. Disc
-class CenterPool{
-    + centerpool[BLUE, YELLOW, RED, BLACK, BLUESTAR] : Array[20,20,20,20,20]
-    __setter__
-    + Disc.dropTiles()
-    __methods__
-    + getSameColoredTiles(Tile)
+Container --o Bag
+class Bag{
+    + setDisc(Disc)
+
 }
 
-Container <|--Tiles
+Container --o DiscardPile
+class DiscardPile{
+    + getBrokenTiles(BroktenTiles)
+    + fillUpBag()
+}
+
+Container --*Tiles
 enum Tiles{
     BLUE
     YELLOW
@@ -34,44 +26,54 @@ enum Tiles{
     BLUESTAR
 }
 
-Container <|-- PlayerBoard
+Container --o Disc
+class Disc{
+    + getSameColoredTiles(Disc)
+    + dropTilesToCenter()
+    + setDisc()
+}
+
+Container --o CenterPool
+class CenterPool{
+    + getSameColoredTiles(Tile)
+}
+
 class PlayerBoard{
     + points : int
     __methods__
-    + calculatePoints()
+    + calculatePoints(Wall wall, SampleTileRow str)
 
 }
 
-PlayerBoard +-- SampleTileRow
-class SampleTileRow{
-    row[] : Array[Tile]
-    __setter__
-    setRow()
-    __getter__
-    getRow()
+PlayerBoard --* SampleTileRows
+class SampleTileRows{
+    row1[] : Map[Tile,int count]
+    row2[] : Map[Tile,int count]
+    row3[] : Map[Tile,int count]
+    row4[] : Map[Tile,int count]
+    row5[] : Map[Tile,int count]
     __methods__
-
+    setRow(row)
+    getRow(row)
 
 }
-note left: setter makes all the rows (0-4)
 
-PlayerBoard <|-- Wall
+PlayerBoard --* Wall
 class Wall{
-    wall[4][4] : Array[Tile][Tile]
-    __methods__
-    + static int addPoints()
+    wall[4][4] : Array[][]
 }
 
-PlayerBoard <|-- BrokenTiles
+PlayerBoard --* BrokenTiles
 class BrokenTiles{
     + brokenTiles[6] : Array[Tile]
     __setter__
-    + setBrokenTiles()
-    __getter__
-    - getBrokenTiles()
-    __methods__
-     + static int minusPoints()
+    + addBrokenTiles()
 
 }
 
+Game --* Container : contains
+Game --* PlayerBoard : contains
+class Game {
+
+}
 @enduml
