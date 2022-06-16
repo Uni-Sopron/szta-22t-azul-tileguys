@@ -1,69 +1,79 @@
 @startuml Azul classes
 abstract class Container{
-    + container[BLUE, YELLOW, RED, BLACK, BLUESTAR] : Array[20,20,20,20,20]
+    + container[BLUE, YELLOW, RED, BLACK, BLUESTAR, EMPTY, FIRST_PLAYER] : Array[20,20,20,20,20,255,1]
     
 
 }
 
-Container --o Bag
+Bag --o Container
 class Bag{
     + setDisc(Disc)
 
 }
 
-Container --o DiscardPile
+DiscardPile --o Container
 class DiscardPile{
     + getBrokenTiles(BroktenTiles)
     + fillUpBag()
 }
 
-Container --*Tiles
-enum Tiles{
+Tile --* Container
+enum Tile{
     BLUE
     YELLOW
     RED
     BLACK
     BLUESTAR
+    EMPTY
+    FIRST_PLAYER
 }
 
-Container --o Disc
+Disc --o Container
 class Disc{
     + getSameColoredTiles(Disc)
     + dropTilesToCenter()
     + setDisc()
 }
 
-Container --o CenterPool
+CenterPool --o Container
 class CenterPool{
     + getSameColoredTiles(Tile)
 }
 
 class PlayerBoard{
+    + wall : Wall
+    + sampleTiles0 : SampleTileRow
+    + sampleTiles1 : SampleTileRow
+    + sampleTiles2 : SampleTileRow
+    + sampleTiles3 : SampleTileRow
+    + sampleTiles4 : SampleTileRow
+    + brokenTiles : BrokenTiles
     + points : int
+    + firstplayer : boolean
     __methods__
-    + calculatePoints(Wall wall, SampleTileRow str)
+    + calculatePoints(Wall wall, SampleTileRow str, firstPlayer first)
 
 }
 
-PlayerBoard --* SampleTileRows
-class SampleTileRows{
-    row1[] : Map[Tile,int count]
-    row2[] : Map[Tile,int count]
-    row3[] : Map[Tile,int count]
-    row4[] : Map[Tile,int count]
-    row5[] : Map[Tile,int count]
+PlayerBoard --o SampleTileRow
+class SampleTileRow{
+    + row : Map[Tile,int count]
     __methods__
-    setRow(row)
-    getRow(row)
+    + setRow(boolean isEmpty, Tile tile, int count)
+    + getRow()
+    + clearRow()
 
 }
 
-PlayerBoard --* Wall
+PlayerBoard --o Wall
 class Wall{
     wall[4][4] : Array[][]
+    __methods__
+    + setWall()
+    + getWall()
 }
 
-PlayerBoard --* BrokenTiles
+PlayerBoard --o BrokenTiles
 class BrokenTiles{
     + brokenTiles[6] : Array[Tile]
     __setter__
@@ -71,9 +81,16 @@ class BrokenTiles{
 
 }
 
-Game --* Container : contains
-Game --* PlayerBoard : contains
+Container --*  Game 
+PlayerBoard --* Game
 class Game {
-
+    bag : Bag
+    discardPile : DiscardPile
+    disc : Disc
+    centerPool : CenterPool
+    playerBoards[] : PlayerBoard
+    __methods__
+    startGame()
+    endGame() : Player winner
 }
 @enduml
