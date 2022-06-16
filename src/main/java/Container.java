@@ -1,16 +1,19 @@
-import java.lang.reflect.Array;
 
 public abstract class Container {
-    public enum Tiles{
+    /**
+     * Tile has an EMPTY value to fill the objects with it for the init. Those objects are: Wall, SampleTileRow, BrokenTiles
+     */
+    public enum Tile{
         BLACK,
         BLUE,
         BLUESTAR,
         RED,
-        YELLOW
+        YELLOW,
+        EMPTY,
+        FIRST_PLAYER
     }
-    public Tiles[] container;
+    public Tile[] container;
 
     protected Container(){
-        
     }
 }
