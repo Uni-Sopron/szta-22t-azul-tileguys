@@ -1,0 +1,79 @@
+@startuml Azul classes
+abstract class Container{
+    + container[BLUE, YELLOW, RED, BLACK, BLUESTAR] : Array[20,20,20,20,20]
+    
+
+}
+
+Container --o Bag
+class Bag{
+    + setDisc(Disc)
+
+}
+
+Container --o DiscardPile
+class DiscardPile{
+    + getBrokenTiles(BroktenTiles)
+    + fillUpBag()
+}
+
+Container --*Tiles
+enum Tiles{
+    BLUE
+    YELLOW
+    RED
+    BLACK
+    BLUESTAR
+}
+
+Container --o Disc
+class Disc{
+    + getSameColoredTiles(Disc)
+    + dropTilesToCenter()
+    + setDisc()
+}
+
+Container --o CenterPool
+class CenterPool{
+    + getSameColoredTiles(Tile)
+}
+
+class PlayerBoard{
+    + points : int
+    __methods__
+    + calculatePoints(Wall wall, SampleTileRow str)
+
+}
+
+PlayerBoard --* SampleTileRows
+class SampleTileRows{
+    row1[] : Map[Tile,int count]
+    row2[] : Map[Tile,int count]
+    row3[] : Map[Tile,int count]
+    row4[] : Map[Tile,int count]
+    row5[] : Map[Tile,int count]
+    __methods__
+    setRow(row)
+    getRow(row)
+
+}
+
+PlayerBoard --* Wall
+class Wall{
+    wall[4][4] : Array[][]
+}
+
+PlayerBoard --* BrokenTiles
+class BrokenTiles{
+    + brokenTiles[6] : Array[Tile]
+    __setter__
+    + addBrokenTiles()
+
+}
+
+Game --* Container : contains
+Game --* PlayerBoard : contains
+class Game {
+
+}
+@enduml
